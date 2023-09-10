@@ -129,6 +129,7 @@ def submit(request, course_id):
     choices = extract_answers(request)
     submission.choices.set(choices)
     submission_id = submission.id
+    print('here')
     return HttpResponseRedirect(reverse(viewname='onlinecourse:exam_result', args=(course_id, submission_id,)))
 
 
@@ -148,6 +149,6 @@ def show_exam_result(request, course_id, submission_id):
             total_score += choice.question.grade
     context = {}
     context['course'] = course
-    content['grade'] = total_score
-    content['choices'] = choices
+    context['grade'] = total_score
+    context['choices'] = choices
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
